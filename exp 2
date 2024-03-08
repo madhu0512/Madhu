@@ -1,6 +1,28 @@
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
-
 import numpy as np
 import pandas as pd
 data = pd.read_csv(r"\Users\HP\Desktop\Iris.csv")
+data.head(20)
+features = ['SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthCm']
+x = data[features]
+y = data['Species']
+from sklearn.model_selection import train_test_split
+train_x,test_x,train_y,test_y = train_test_split(x,y)
+print("Train Set:")
+print(train_x)
+# Print the test set records
+print("\nTest Set:")
+print(test_x)
+print("Train Set:")
+print(train_y)
+# Print the test set records
+print("\nTest Set:")
+print(test_y)
+from sklearn.svm import SVC
+model = SVC()
+model.fit(train_x,train_y)
+model.predict([[5.1,3.5,1.4,0.2]])
+prediction = model.predict(test_x)
+from sklearn.metrics import accuracy_score
+accuracy_score(test_y, prediction) 
